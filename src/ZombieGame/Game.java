@@ -1,13 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package ZombieGame;
+
+import java.awt.Canvas;
 
 /**
  *
  * @author Sabrina
  */
-public class Game {
+public class Game  extends Canvas implements Runnable{
+    
+    
+    public Game(){
+        new Window(1000, 600, "Zombie Game", this );
+    }
+    public static void main(String[] args) {
+        
+        new Game();
+        
+    }
+
+    @Override
+    public void run() {
+        
+    }
     
 }
