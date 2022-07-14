@@ -2,6 +2,9 @@
 package ZombieGame;
 
 import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
 
 /**
  *
@@ -69,11 +72,33 @@ public class Game  extends Canvas implements Runnable{
         stop();
     }
 
+//   update everything
     private void tick() {
     }
 
+//    render everything
     private void render() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        BufferStrategy bs = this.getBufferStrategy();
+                if(bs ==null){
+                    this.createBufferStrategy(3);
+                    return;
+                    
+                }
+                Graphics g= bs.getDrawGraphics();
+////////////////////////////////////////////     
+
+                g.setColor(Color.red);
+                g.fillRect(0, 0, 1000, 600);
+
+
+////////////////////////////////////////////                
+
+                
+                g.dispose();
+                bs.show();
+                
+           
+
     }
     
 }
