@@ -24,6 +24,8 @@ public class Game  extends Canvas implements Runnable{
         handler = new Handler();
         
         handler.addObject(new Box(100, 100));
+                handler.addObject(new Box(200, 100));
+
          
     }
     
