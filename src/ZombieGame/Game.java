@@ -15,10 +15,13 @@ public class Game  extends Canvas implements Runnable{
     private  boolean isRunning = false;
     private Thread thread;
     
+    private Handler handler;
+    
     
     public Game(){
         new Window(1000, 600, "Zombie Game", this );
         start();
+        handler = new Handler();
     }
     
 //    Game Start method
@@ -74,6 +77,7 @@ public class Game  extends Canvas implements Runnable{
 
 //   update everything
     private void tick() {
+        handler.tick();
     }
 
 //    render everything
@@ -89,6 +93,7 @@ public class Game  extends Canvas implements Runnable{
 
                 g.setColor(Color.red);
                 g.fillRect(0, 0, 1000, 600);
+                handler.render(g);
 
 
 ////////////////////////////////////////////                
@@ -101,5 +106,5 @@ public class Game  extends Canvas implements Runnable{
 
     }
     
-}
+} 
  
