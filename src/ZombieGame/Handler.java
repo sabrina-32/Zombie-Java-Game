@@ -26,4 +26,13 @@ public class Handler {
             tempObject.render(g);
         }
     }
+    
+    public  void addObject(GameObject tempObject){
+        object.add(tempObject);
+    }
+    
+    public void removeObject(GameObject tempObject){
+        object.remove(tempObject);
+}
+    
 }
