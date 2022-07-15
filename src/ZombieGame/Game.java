@@ -22,6 +22,9 @@ public class Game  extends Canvas implements Runnable{
         new Window(1000, 600, "Zombie Game", this );
         start();
         handler = new Handler();
+        
+        handler.addObject(new Box(100, 100));
+         
     }
     
 //    Game Start method
