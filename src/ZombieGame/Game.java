@@ -19,11 +19,11 @@ public class Game  extends Canvas implements Runnable{
     
     
     public Game(){
-        new Window(1000, 600, "Zombie Game", this );
+        new Window(1000, 600, "Zombie Killing Game", this );
         start(); 
         handler = new Handler();
-        
-        handler.addObject(new Box(100, 100, ID.Block));
+        this.addKeyListener((new KeyInput(handler)));
+        handler.addObject(new Protagonist(100, 100, ID.Player, handler));
 
          
     }
