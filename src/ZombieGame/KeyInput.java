@@ -4,10 +4,22 @@
  */
 package ZombieGame;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 /**
  *
  * @author Sabrina
  */
-public class KeyInput {
+public class KeyInput  extends KeyAdapter{
+    
+    
+    public void keyPressed(KeyEvent e){
+        
+    }
+    
+    public void keyReleased(KeyEvent e){
+        
+    }
     
 }
