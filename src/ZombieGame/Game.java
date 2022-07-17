@@ -5,6 +5,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -16,6 +17,8 @@ public class Game  extends Canvas implements Runnable{
     private Thread thread;
     
     private Handler handler;
+    private BufferedImage level = null;
+
     
     
     public Game(){
@@ -23,6 +26,9 @@ public class Game  extends Canvas implements Runnable{
         start(); 
         handler = new Handler();
         this.addKeyListener((new KeyInput(handler)));
+        
+        BufferedImageLoader loader = new BufferedImageLoader();
+        level = loader.loadImage("/zombie-game-board.png");
         handler.addObject(new Protagonist(100, 100, ID.Player, handler));
 
          
