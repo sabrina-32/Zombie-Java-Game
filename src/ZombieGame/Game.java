@@ -29,9 +29,9 @@ public class Game  extends Canvas implements Runnable{
         
         BufferedImageLoader loader = new BufferedImageLoader();
         level = loader.loadImage("/zombie-game-board.png");
-        handler.addObject(new Protagonist(100, 100, ID.Player, handler));
 
-         
+         loadLevel(level);
+          
     }
     
 //    Game Start method
@@ -51,11 +51,7 @@ public class Game  extends Canvas implements Runnable{
        }
        
     }
-    public static void main(String[] args) {
-        
-        new Game();
-        
-    }
+    
 
     @Override
     public void run() {
@@ -115,6 +111,37 @@ public class Game  extends Canvas implements Runnable{
            
 
     }
+//    loading the level
+    
+    private void loadLevel(BufferedImage image){
+        int w = image.getWidth();
+        int h = image.getHeight();
+        
+        for(int xx=0; xx<w; xx++){
+            for(int yy =0;yy<h;  yy++  ){
+                int pixel =  image.getRGB(xx, yy);
+                int red = (pixel>>16) & 0xff;
+                int green = (pixel>>8) & 0xff;
+                int blue = (pixel) & 0xff;
+                
+                if(red == 255)
+                    handler.addObject(new Block(xx*32,  yy*32,  ID.Block));
+                if(blue == 255)
+                    handler.addObject(new Protagonist(xx*32,  yy*32,  ID.Player, handler));
+                
+
+            }
+        }
+        
+    }
+    
+    public static void main(String[] args) {
+        
+        new Game();
+        
+    }
+    
+   
     
 } 
  
