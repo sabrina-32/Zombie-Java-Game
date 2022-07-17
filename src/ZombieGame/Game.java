@@ -4,6 +4,7 @@ package ZombieGame;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
@@ -31,7 +32,7 @@ public class Game  extends Canvas implements Runnable{
         
         BufferedImageLoader loader = new BufferedImageLoader();
          
-        level = loader.loadImage("/zombie game board.png");
+        level = loader.loadImage("/zombie game board_1.png");
 
          loadLevel(level);
           
@@ -93,7 +94,7 @@ public class Game  extends Canvas implements Runnable{
         }
         handler.tick();
     }
-
+ 
 //    render everything
     private void render() {
         BufferStrategy bs = this.getBufferStrategy();
@@ -103,11 +104,18 @@ public class Game  extends Canvas implements Runnable{
                     
                 }
                 Graphics g= bs.getDrawGraphics();
-////////////////////////////////////////////     
+                Graphics2D g2d = (Graphics2D) g;
+////////////////////////////////////////////   
 
-                g.setColor(Color.red);
+  g.setColor(Color.red);
                 g.fillRect(0, 0, 1000, 600);
+                g2d.translate(-camera.getX(), -camera.getY());
+                
+              
                 handler.render(g);
+                
+                g2d.translate(camera.getX(), camera.getY());
+
 
 
 ////////////////////////////////////////////                
