@@ -1,6 +1,6 @@
 
 package ZombieGame;
-
+ 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -21,7 +21,7 @@ public class Block extends GameObject{
 
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.blue);
+        g.setColor(Color.black);
         g.fillRect(x, y, 32, 32);
 
     }

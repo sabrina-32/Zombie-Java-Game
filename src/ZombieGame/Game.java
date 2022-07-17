@@ -28,7 +28,8 @@ public class Game  extends Canvas implements Runnable{
         this.addKeyListener((new KeyInput(handler)));
         
         BufferedImageLoader loader = new BufferedImageLoader();
-        level = loader.loadImage("/zombie-game-board.png");
+         
+        level = loader.loadImage("/zombie game board.png");
 
          loadLevel(level);
           
@@ -118,7 +119,7 @@ public class Game  extends Canvas implements Runnable{
         int h = image.getHeight();
         
         for(int xx=0; xx<w; xx++){
-            for(int yy =0;yy<h;  yy++  ){
+            for(int yy =0;yy<h;  yy++  ){ 
                 int pixel =  image.getRGB(xx, yy);
                 int red = (pixel>>16) & 0xff;
                 int green = (pixel>>8) & 0xff;
