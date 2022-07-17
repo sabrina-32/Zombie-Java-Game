@@ -18,13 +18,15 @@ public class Game  extends Canvas implements Runnable{
     
     private Handler handler;
     private BufferedImage level = null;
-
+    private  Camera camera;
+    
     
     
     public Game(){
         new Window(1000, 600, "Zombie Killing Game", this );
         start(); 
         handler = new Handler();
+         camera  =  new Camera(0,0); 
         this.addKeyListener((new KeyInput(handler)));
         
         BufferedImageLoader loader = new BufferedImageLoader();
@@ -84,6 +86,11 @@ public class Game  extends Canvas implements Runnable{
 
 //   update everything
     private void tick() {
+        for(int i =0; i<handler.object.size(); i++){
+            if(handler.object.get(i).getId()==ID.Player){
+                camera.tick(handler.object.get(i));
+            }
+        }
         handler.tick();
     }
 
