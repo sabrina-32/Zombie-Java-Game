@@ -35,8 +35,10 @@ public class Enemy extends GameObject{
             if(tempObject.getId() == ID.Block){
               
                 if(getBoundsBig().intersects(tempObject.getBounds())){
-                    velX +=(velX*2) * -1;
-                    velY +=(velY*2) * -1;
+                    x +=(velX*5) * -1;
+                    y +=(velY*5) * -1;
+                    velX *= -1;
+                    velY *= -1;
 
                     
                 }
@@ -47,7 +49,16 @@ public class Enemy extends GameObject{
         }
             }
             
+            if(tempObject.getId() == ID.Bullet){
+                if(getBounds().intersects(tempObject.getBounds())){
+                    hp -=50;
+                    handler.removeObject((tempObject));
+                }
+            }
+            
         }
+        
+        if(hp <= 0) handler.removeObject(this);
         
     }
 
