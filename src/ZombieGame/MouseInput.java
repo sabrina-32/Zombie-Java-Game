@@ -21,6 +21,14 @@ public class MouseInput  extends MouseAdapter{
        
         int mx =(int) (e.getX() + camera.getX());
         int my =(int) (e.getY() + camera.getY());
+        
+        for(int i= 0;  i<  handler.object.size();  i++){
+            GameObject  tempObject  =  handler.object.get(i);
+            if(tempObject.getId() ==ID.Player){
+               handler.addObject(new Bullet(tempObject.getX()+16, tempObject.getY()+24,ID.Bullet,  handler,  mx, my));
+               
+            }
+        }
 
     }
 }
