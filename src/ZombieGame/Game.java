@@ -8,7 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
-/**
+/** 
  *
  * @author Sabrina
  */
@@ -24,7 +24,7 @@ public class Game  extends Canvas implements Runnable{
     
     
     public Game(){
-        new Window(1000, 600, "Zombie Killing Game", this );
+        new Window(1000, 563, "Zombie Killing Game", this );
         start(); 
         handler = new Handler();
          camera  =  new Camera(0,0); 
@@ -88,7 +88,7 @@ public class Game  extends Canvas implements Runnable{
 //   update everything
     private void tick() {
         for(int i =0; i<handler.object.size(); i++){
-            if(handler.object.get(i).getId()==ID.Player){
+            if(handler.object.get(i).getId()== ID.Player){
                 camera.tick(handler.object.get(i));
             }
         }
@@ -107,8 +107,8 @@ public class Game  extends Canvas implements Runnable{
                 Graphics2D g2d = (Graphics2D) g;
 ////////////////////////////////////////////   
 
-  g.setColor(Color.red);
-                g.fillRect(0, 0, 1000, 600);
+                g.setColor(Color.red);
+                g.fillRect(0, 0, 1000, 563);
                 g2d.translate(-camera.getX(), -camera.getY());
                 
               
@@ -116,11 +116,8 @@ public class Game  extends Canvas implements Runnable{
                 
                 g2d.translate(camera.getX(), camera.getY());
 
-
-
 ////////////////////////////////////////////                
 
-                
                 g.dispose();
                 bs.show();
                 
