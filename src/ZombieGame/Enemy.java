@@ -4,6 +4,7 @@ package ZombieGame;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.Random;
 
 /**
  *
@@ -12,6 +13,10 @@ import java.awt.Rectangle;
 public class Enemy extends GameObject{
 
     private  Handler  handler;
+    Random  r  = new  Random();
+    int  choose  =0;
+    int  hp =100;
+    
     public Enemy(int  x,  int  y, ID  id, Handler  handler){
         super(x,y,id);
         this.handler =handler;
@@ -21,6 +26,13 @@ public class Enemy extends GameObject{
     public void tick() {
         x += velX;
         y +=velY;
+        
+        choose =  r.nextInt(10);
+        if(choose ==0){
+            velX = (r.nextInt(4 - -4) + -4);
+            velY = (r.nextInt(4 - -4) + -4);
+
+        }
     }
 
     @Override
