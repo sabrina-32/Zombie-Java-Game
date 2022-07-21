@@ -3,6 +3,7 @@ package ZombieGame;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.Random;
 
@@ -28,6 +29,14 @@ public class Enemy extends GameObject{
         y +=velY;
         
         choose =  r.nextInt(10);
+        
+        for(int  i=0;  i<handler.object.size();  i++){
+            GameObject tempObject = handler.object.get(i);
+            if(tempObject.getId() == ID.Block){
+                
+            }
+            
+        }
         if(choose ==0){
             velX = (r.nextInt(4 - -4) + -4);
             velY = (r.nextInt(4 - -4) + -4);
@@ -40,11 +49,21 @@ public class Enemy extends GameObject{
         
         g.setColor(Color.yellow);
         g.fillRect(x, y, 32, 32);
+        
+        Graphics2D g2d = (Graphics2D)g;
+        g.setColor(Color.green);
+        g2d.draw(getBoundsBig());
+                
+        
     }
 
     @Override
     public Rectangle getBounds() {
-        return null;
+        return new Rectangle(x, y, 32, 32);
+    }
+    
+      public Rectangle getBoundsBig() {
+        return new Rectangle(x-16, y-16, 64, 64);
     }
     
 }
