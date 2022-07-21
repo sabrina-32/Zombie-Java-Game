@@ -32,7 +32,7 @@ public class Game  extends Canvas implements Runnable{
         this.addMouseListener(new MouseInput(handler,  camera));
         BufferedImageLoader loader = new BufferedImageLoader();
          
-        level = loader.loadImage("/zombie game board_1.png");
+        level = loader.loadImage("/wizard_level.png");
 
          loadLevel(level);
           
