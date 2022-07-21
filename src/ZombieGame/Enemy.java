@@ -33,15 +33,22 @@ public class Enemy extends GameObject{
         for(int  i=0;  i<handler.object.size();  i++){
             GameObject tempObject = handler.object.get(i);
             if(tempObject.getId() == ID.Block){
-                
-            }
-            
-        }
-        if(choose ==0){
+              
+                if(getBoundsBig().intersects(tempObject.getBounds())){
+                    velX +=(velX*2) * -1;
+                    velY +=(velY*2) * -1;
+
+                    
+                }
+                else if(choose ==0){
             velX = (r.nextInt(4 - -4) + -4);
             velY = (r.nextInt(4 - -4) + -4);
 
         }
+            }
+            
+        }
+        
     }
 
     @Override
@@ -50,10 +57,7 @@ public class Enemy extends GameObject{
         g.setColor(Color.yellow);
         g.fillRect(x, y, 32, 32);
         
-        Graphics2D g2d = (Graphics2D)g;
-        g.setColor(Color.green);
-        g2d.draw(getBoundsBig());
-                
+             
         
     }
 
