@@ -39,6 +39,18 @@ public class Protagonist extends GameObject {
         
         
     }
+    
+    private  void collision(){
+        for(int  i=0;  i<handler.object.size();  i++){
+            GameObject tempObject =  handler.object.get(i);
+            if(tempObject.getId()== ID.Block){
+                if(getBounds().intersects(tempObject.getBounds())){
+                    x += velX * -1;
+                    y +=velY * -1;
+                }
+            }
+        }
+    }
 
     @Override
     public void render(Graphics g) {
