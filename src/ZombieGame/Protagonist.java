@@ -4,6 +4,7 @@ package ZombieGame;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -13,12 +14,13 @@ public class Protagonist extends GameObject {
     
     Handler handler;
     Game game;
-    SpriteSheet ss;
-    
+private BufferedImage hero_image;    
     public Protagonist(int x,  int y, ID id, Handler handler,Game game, SpriteSheet ss){
         super(x,y,id,ss);
         this.handler = handler;
         this.game =game;
+        hero_image = ss.grabImage(1, 1, 32,45);
+        
     }
 
     @Override
@@ -66,8 +68,7 @@ public class Protagonist extends GameObject {
     @Override
     public void render(Graphics g) {
         
-        g.setColor(Color.blue);
-        g.fillRect(x, y, 33, 48);
+       g.drawImage(hero_image, x, y, null);
     }
 
     @Override
