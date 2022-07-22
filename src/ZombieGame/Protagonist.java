@@ -61,6 +61,11 @@ private BufferedImage hero_image;
                    handler.removeObject(tempObject);
                 }
             }
+               if(tempObject.getId()== ID.Enemy){
+                if(getBounds().intersects(tempObject.getBounds())){
+                   game.hp--;
+                 }
+            }
         }
     }
 
