@@ -13,8 +13,10 @@ public class Protagonist extends GameObject {
     
     Handler handler;
     Game game;
-    public Protagonist(int x,  int y, ID id, Handler handler,Game game){
-        super(x,y,id);
+    SpriteSheet ss;
+    
+    public Protagonist(int x,  int y, ID id, Handler handler,Game game, SpriteSheet ss){
+        super(x,y,id,ss);
         this.handler = handler;
         this.game =game;
     }
