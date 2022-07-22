@@ -12,9 +12,11 @@ import java.awt.Rectangle;
 public class Protagonist extends GameObject {
     
     Handler handler;
-    public Protagonist(int x,  int y, ID id, Handler handler){
+    Game game;
+    public Protagonist(int x,  int y, ID id, Handler handler,Game game){
         super(x,y,id);
         this.handler = handler;
+        this.game =game;
     }
 
     @Override
@@ -47,6 +49,13 @@ public class Protagonist extends GameObject {
                 if(getBounds().intersects(tempObject.getBounds())){
                     x += velX * -1;
                     y +=velY * -1;
+                }
+            }
+            
+             if(tempObject.getId()== ID.Create){
+                if(getBounds().intersects(tempObject.getBounds())){
+                   game.ammo +=10;
+                   handler.removeObject(tempObject);
                 }
             }
         }
