@@ -22,6 +22,8 @@ public class Game  extends Canvas implements Runnable{
     private  Camera camera;
     
     private BufferedImage sprite_sheet = null;
+    private SpriteSheet ss;
+    
     public  int  ammo =100;
     
     
@@ -37,6 +39,8 @@ public class Game  extends Canvas implements Runnable{
          
         level = loader.loadImage("/wizard_level.png");
         sprite_sheet = loader.loadImage("/sprite_sheet.png");
+        ss = new SpriteSheet(sprite_sheet);
+         
 
          loadLevel(level);
           
