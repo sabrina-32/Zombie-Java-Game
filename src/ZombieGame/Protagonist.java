@@ -1,4 +1,3 @@
-
 package ZombieGame;
 
 import java.awt.Color;
