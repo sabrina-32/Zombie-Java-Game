@@ -9,10 +9,6 @@ package ZombieGame;
  */
 public enum ID {
     
-   Player(),
-   Block(),
-   Create(),
-   Bullet(),
-   Enemy();
+  
         
 }
