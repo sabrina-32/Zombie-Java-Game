@@ -14,16 +14,7 @@ import java.awt.image.BufferedImage;
  */
 public class Hero extends GameObject {
     
-    public static int HERO_WIDTH = 32;    
-    public static int HERO_HEIGHT = 48;
-
-    
-    protected Handler m_Handler;
-    protected ZombieKillingGame m_zombieKillingGame;
-    
-    private BufferedImage[] m_buffImg;
-    
-    protected Animation m_Animation;
+   
     
 
     public Hero(int iX, int iY, ID id, Handler newHandler, 
