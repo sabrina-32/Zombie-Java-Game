@@ -1,4 +1,6 @@
 
+// Class: Handler
+
 package ZombieGame;
 
 import java.awt.Graphics;
@@ -9,74 +11,81 @@ import java.util.LinkedList;
  * @author Sabrina
  */
 public class Handler {
-    
-    LinkedList<GameObject> object = new LinkedList<GameObject>();
+
+   LinkedList<GameObject> gameObjects = new LinkedList<GameObject>();
    
-    private boolean up = false,  down =  false,  right = false, left = false;
-    
-    public void tick(){
-        for(int i =0; i<object.size(); i++){
-            GameObject tempObject  = object.get(i);
-            tempObject.tick();
-            
-        }
-    }
-    
-    public void render(Graphics g){
-        for(int  i =0; i<object.size(); i++){
-            GameObject tempObject = object.get(i);
-            tempObject.render(g);
-        }
-    }
-    
-    public  void addObject(GameObject tempObject){
-        object.add(tempObject);
-    }
-    
-    public void removeObject(GameObject tempObject){
-        object.remove(tempObject);
-}
+   private boolean m_bUp = false;
+   private boolean m_bDown = false;
+   private boolean m_bRight = false;
+   private boolean m_bLeft = false;
+   
+   
+   public void tick() {
+   
+      int iCount;
+      
+      for (iCount = 0; iCount < gameObjects.size(); ++iCount) {
+      
+         GameObject tempGameObject = gameObjects.get(iCount);
+         
+         tempGameObject.tick();
+          
+      }
+              
+   }
+   
+   public void render(Graphics g) {
+   
+      int iCount;
+      
+      for (iCount = 0; iCount < gameObjects.size(); ++iCount) {
+      
+         GameObject tempGameObject = gameObjects.get(iCount);
+         
+         tempGameObject.render(g);
+          
+      }
+      
+   }
+   
+   public void addGameObject(GameObject tempGameObject) {
+      gameObjects.add(tempGameObject);
+   }
+   
+   public void removeGameObject(GameObject tempGameObject) {
+      gameObjects.remove(tempGameObject);
+   }   
+   
+   public boolean isUp() {
+      return m_bUp;
+   }
+   
+   public void setUp(boolean bUp) {
+      this.m_bUp = bUp;    
+   } 
+   
+   public boolean isDown() {
+      return m_bDown;
+   }
+   
+   public void setDown(boolean bDown) {
+      this.m_bDown = bDown;    
+   }    
+   
+   public boolean isRight() {
+      return m_bRight;
+   }
+   
+   public void setRight(boolean bRight) {
+      this.m_bRight = bRight;    
+   }    
 
-    public LinkedList<GameObject> getObject() {
-        return object;
-    }
-
-    public void setObject(LinkedList<GameObject> object) {
-        this.object = object;
-    }
-
-    public boolean isUp() {
-        return up;
-    }
-
-    public void setUp(boolean up) {
-        this.up = up;
-    }
-
-    public boolean isDown() {
-        return down;
-    }
-
-    public void setDown(boolean down) {
-        this.down = down;
-    }
-
-    public boolean isRight() {
-        return right;
-    }
-
-    public void setRight(boolean right) {
-        this.right = right;
-    }
-
-    public boolean isLeft() {
-        return left;
-    }
-
-    public void setLeft(boolean left) {
-        this.left = left;
-    }
-    
-    
-    
+   public boolean isLeft() {
+      return m_bLeft;
+   }
+   
+   public void setLeft(boolean bLeft) {
+      this.m_bLeft = bLeft;    
+   }    
+   
 }

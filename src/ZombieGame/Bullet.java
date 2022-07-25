@@ -1,7 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
+// Class: Bullet
+
 package ZombieGame;
 
 import java.awt.Color;
@@ -14,44 +13,62 @@ import java.awt.Rectangle;
  */
 public class Bullet extends GameObject {
     
-    
-    private Handler  handler;
-    
-    public Bullet(int x,  int y, ID id,Handler  handler, int mx,  int  my, SpriteSheet ss){
-        super(x,y,id,ss);
-        this.handler =handler;
+   public static int BUL_WIDTH = 8;    
+   public static int BUL_HEIGHT = 8;
+   
+   private Handler m_Handler; 
+
+   
+   public Bullet(int iX, int iY, ID id, Handler newHandler, int iMouseX, 
+                                        int iMouseY, SpriteSheet spriteSheet) {
         
-        velX = (mx - x)/10;
-                velY = (my - y)/10;
-
-    }
-
-    @Override
-    public void tick() {
+      super(iX, iY, id, spriteSheet);
+      this.m_Handler = newHandler;
+      
+      m_fVelX = (iMouseX - m_iX) / 10;
+      m_fVelY = (iMouseY - m_iY) / 10;
         
-        x +=velX;
-        y +=velY;
-        
-        for(int  i = 0; i<handler.object.size();  i++){
-            GameObject  tempObject  =  handler.object.get(i);
-            
-            if(tempObject.getId() == ID.Block){
-                if(getBounds().intersects(tempObject.getBounds())){
-                    handler.removeObject(this);
-                }
-            }
-        }
-    }
+   }    
+  
+   public void tick() {
+       
 
-    @Override
-    public void render(Graphics g) {
-        g.setColor(Color.green);
-        g.fillRect(x, y, 8, 8);
-    }
-
-    @Override
-    public Rectangle getBounds() {
-        return new  Rectangle(x,y,8,8);
-    }
+      m_iX += m_fVelX;
+      m_iY += m_fVelY;
+ 
+      int iCount;     
+      
+      for (iCount = 0; iCount < m_Handler.gameObjects.size(); ++iCount) {
+      
+         GameObject tempGameObject = m_Handler.gameObjects.get(iCount);
+         
+         if (tempGameObject.getID() == ID.Block) {
+         
+            if (getBounds().intersects(tempGameObject.getBounds())) {
+               
+               // Remove the Bullet. 
+               m_Handler.removeGameObject(this);
+               
+            }    
+             
+         }
+          
+      }      
+      
+   }
+ 
+   public void render(Graphics g) {
+       
+      g.setColor(Color.green);
+      g.fillOval(m_iX, m_iY, Bullet.BUL_WIDTH, Bullet.BUL_HEIGHT);
+ 
+   }
+ 
+   public Rectangle getBounds() {
+       
+      return new Rectangle(m_iX, m_iY, Bullet.BUL_WIDTH, Bullet.BUL_HEIGHT);
+      
+   }
     
 }
+

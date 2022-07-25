@@ -1,4 +1,6 @@
 
+// Class: Enemy
+
 package ZombieGame;
 
 import java.awt.Color;
@@ -12,76 +14,136 @@ import java.util.Random;
  *
  * @author Sabrina
  */
-public class Enemy extends GameObject{
+public class Enemy extends GameObject {
 
-    private  Handler  handler;
-    Random  r  = new  Random();
-    int  choose  =0;
-    int  hp =100;
-    private BufferedImage enemy_image;
+    public static int ENEMY_WIDTH = 32;    
+    public static int ENEMY_HEIGHT = 32;
+    
+    private Handler m_Handler;
+    private Random m_Random = new Random();
+    int m_iChoose = 0;
+    int m_iHP = 100;
+   
+    private BufferedImage[] m_Enemy;
+    
+    protected Animation m_Animation;
     
     
-    public Enemy(int  x,  int  y, ID  id, Handler  handler, SpriteSheet ss){
-        super(x,y,id,ss);
-        this.handler =handler;
-        enemy_image = ss.grabImage(4, 1,32, 32);
+    public Enemy(int iX, int iY, ID id, Handler newHandler, 
+                                                    SpriteSheet spriteSheet) {
+        
+        super(iX, iY, id, spriteSheet);
+        
+        int iCount;        
+        
+        this.m_Handler = newHandler;
+        
 
+        m_Enemy = new BufferedImage[3];
+        
+        for (iCount = 0; iCount < 3; ++iCount) {
+            
+           m_Enemy[iCount] = spriteSheet.grabImage(1, 4 + iCount, 
+                                       Enemy.ENEMY_WIDTH, Enemy.ENEMY_HEIGHT);
+           
+        }
+        
+        m_Animation = new Animation(1, m_Enemy, 3);
+        
     }
-    @Override
+    
     public void tick() {
-        x += velX;
-        y +=velY;
         
-        choose =  r.nextInt(10);
-        
-        for(int  i=0;  i<handler.object.size();  i++){
-            GameObject tempObject = handler.object.get(i);
-            if(tempObject.getId() == ID.Block){
-              
-                if(getBoundsBig().intersects(tempObject.getBounds())){
-                    x +=(velX*5) * -1;
-                    y +=(velY*5) * -1;
-                    velX *= -1;
-                    velY *= -1;
+       int iCount;       
 
-                    
-                }
-                else if(choose ==0){
-            velX = (r.nextInt(4 - -4) + -4);
-            velY = (r.nextInt(4 - -4) + -4);
+       m_iX += m_fVelX;    
+       m_iY += m_fVelY;
+       
+       m_iChoose = m_Random.nextInt(10);
 
-        }
-            }
-            
-            if(tempObject.getId() == ID.Bullet){
-                if(getBounds().intersects(tempObject.getBounds())){
-                    hp -=50;
-                    handler.removeObject((tempObject));
-                }
-            }
-            
-        }
-        
-        if(hp <= 0) handler.removeObject(this);
-        
-    }
-
-    @Override
-    public void render(Graphics g) {
-        
-      g.drawImage(enemy_image, x, y, null);
-        
+       
+       for (iCount = 0; iCount < m_Handler.gameObjects.size(); ++iCount) {
+       
+          GameObject tempGameObject = m_Handler.gameObjects.get(iCount);
+          
+          if (tempGameObject.getID() == ID.Block) {
              
+             // Check if the enemy (with larger box around) and a block 
+             // intersects. 
+             if (getBoundsBig().intersects(tempGameObject.getBounds())) {
+             
+                m_iX += (m_fVelX * 2) * -1;
+                m_iY += (m_fVelY * 2) * -1;
+                
+                m_fVelX *= -1;
+                m_fVelY *= -1;
+                 
+             }
+             
+             // Otherwise choose a random direction.
+             else if (m_iChoose == 0) {
+           
+                m_fVelX = (m_Random.nextInt(8) + (-4));
+                m_fVelY = (m_Random.nextInt(8) + (-4));
+          
+             }             
+          
+          }
+          
+          if (tempGameObject.getID() == ID.Bullet) {
+             
+             // Remove Bullet and let the enemy take damage. 
+             if (getBounds().intersects(tempGameObject.getBounds())) {
+                 
+                m_iHP -= 50;
+                m_Handler.removeGameObject(tempGameObject);
+                
+             }
+              
+          }
+                     
+       }
+       
+       m_Animation.runAnimation();
+       
+       // Remove enemy, if it is dead.
+       if (m_iHP <= 0) {
+           
+          m_Handler.removeGameObject(this);
+          
+       }
+              
+    }
+
+    public void render(Graphics g) {
+
+       // g.setColor(Color.yellow);
+       // g.fillRect(m_iX, m_iY, Enemy.ENEMY_WIDTH, Enemy.ENEMY_HEIGHT);
+       
+       // Graphics2D g2d = (Graphics2D) g;
+       
+       // g.setColor(Color.green);
+       // g2d.draw(getBoundsBig());
+        
+       // g.drawImage(m_Enemy, m_iX, m_iY, null);
+        
+       m_Animation.drawAnimation(g, m_iX, m_iY, 0);
         
     }
 
-    @Override
     public Rectangle getBounds() {
-        return new Rectangle(x, y, 32, 32);
+        
+       return new Rectangle(m_iX, m_iY, Enemy.ENEMY_WIDTH, Enemy.ENEMY_HEIGHT);
+       
     }
+
+    public Rectangle getBoundsBig() {
+        
+       return new Rectangle(m_iX - 16, m_iY - 16, Enemy.ENEMY_WIDTH * 2, 
+                                                     Enemy.ENEMY_HEIGHT * 2);
+       
+    }    
     
-      public Rectangle getBoundsBig() {
-        return new Rectangle(x-16, y-16, 64, 64);
-    }
+
     
 }

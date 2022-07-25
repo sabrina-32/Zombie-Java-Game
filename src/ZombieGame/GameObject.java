@@ -1,7 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
+// Class: GameObject
+
 package ZombieGame;
 
 import java.awt.Graphics;
@@ -12,70 +11,67 @@ import java.awt.Rectangle;
  * @author Sabrina
  */
 public abstract class GameObject {
-    
-    protected int x, y;
-    protected float velX =0, velY=0;
-    
-    protected ID id;
-    protected SpriteSheet ss;
-    
-    public GameObject(int x, int y,  ID id,SpriteSheet ss){
-        this.x =x;
-        this.y = y;
-        this.id =id;
-        this.ss =ss;
-        
-        
-    }
 
+   protected int m_iX;
+   protected int m_iY;
+   protected ID m_ID;
    
-    
-    public  abstract void tick();
-    public  abstract void render(Graphics g);   
-    public  abstract Rectangle getBounds(); 
-    
-     public ID getId() {
-        return id;
-    }
-
-    public void setId(ID id) {
-        this.id = id;
-    }
-    
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public float getVelX() {
-        return velX;
-    }
-
-    public void setVelX(float velX) {
-        this.velX = velX;
-    }
-
-    public float getVelY() {
-        return velY;
-    }
-
-    public void setVelY(float velY) {
-        this.velY = velY;
-    }
-    
-    
-    
-    
+   protected float m_fVelX = 0;
+   protected float m_fVelY = 0;
+   
+   protected SpriteSheet m_SpriteSheet;
+   
+   public GameObject(int iX, int iY, ID id, SpriteSheet spriteSheet) {
+      
+      this.m_iX = iX;
+      this.m_iY = iY;
+      this.m_ID = id;
+      this.m_SpriteSheet = spriteSheet;
+      
+   }  
+   
+   public abstract void tick();
+   public abstract void render(Graphics g);
+   public abstract Rectangle getBounds();
+   
+   public int getX() {
+      return m_iX;
+   }
+   
+   public void setX(int iX) {
+      this.m_iX = iX;
+   }
+   
+   public int getY() {
+      return m_iY;
+   }
+   
+   public void setY(int iY) {
+      this.m_iY = iY;
+   }   
+   
+   public float getVelocityX() {
+      return m_fVelX;
+   }
+   
+   public void setVelocityX(float fVelX) {
+      this.m_fVelX = fVelX;
+   }   
+   
+   public float getVelocityY() {
+      return m_fVelY;
+   }
+   
+   public void setVelocityY(float fVelY) {
+      this.m_fVelY = fVelY;
+   }
+   
+   public ID getID() {
+      return m_ID;
+   }
+   
+   public void setID(ID id) {
+      this.m_ID = id;
+   }
+   
 }
