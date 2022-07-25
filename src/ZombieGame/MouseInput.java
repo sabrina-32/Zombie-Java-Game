@@ -12,11 +12,6 @@ import java.awt.event.MouseEvent;
  */
 public class MouseInput extends MouseAdapter {
 
-   private Handler m_Handler;
-   private Camera m_Camera;
-   private ZombieKillingGame m_zombieKillingGame;
-   private SpriteSheet m_SpriteSheet;
-   
    
    public MouseInput(Handler newHandler, Camera newCamera, 
                                ZombieKillingGame zombieKillingGame, SpriteSheet spriteSheet) {
