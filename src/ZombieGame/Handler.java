@@ -14,7 +14,11 @@ public class Handler {
 
    LinkedList<GameObject> gameObjects = new LinkedList<GameObject>();
    
-  
+   private boolean m_bUp = false;
+   private boolean m_bDown = false;
+   private boolean m_bRight = false;
+   private boolean m_bLeft = false;
+   
    
    public void tick() {
    
