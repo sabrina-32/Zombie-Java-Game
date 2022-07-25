@@ -12,12 +12,7 @@ import java.awt.event.KeyEvent;
  */
 public class KeyInput extends KeyAdapter {
    
-   Handler m_Handler; 
-    
-   public KeyInput(Handler newHandler) {
-       
-      this.m_Handler = newHandler;
-      
+   
    }
     
    public void keyPressed(KeyEvent ke) {
