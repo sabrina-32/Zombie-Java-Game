@@ -13,8 +13,6 @@ import java.awt.Rectangle;
  */
 public class Bullet extends GameObject {
     
-   public static int BUL_WIDTH = 8;    
-   public static int BUL_HEIGHT = 8;
    
    private Handler m_Handler; 
 
