@@ -31,7 +31,9 @@ public class Box extends GameObject {
 
     public void render(Graphics g) {
         
-      
+       g.setColor(Color.blue);
+       g.fillRect(m_iX, m_iY, Box.BOX_WIDTH, Box.BOX_HEIGHT);
+       
     }
 
     public Rectangle getBounds() {
