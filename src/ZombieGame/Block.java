@@ -22,7 +22,10 @@ public class Block extends GameObject {
 
     public Block(int iX, int iY, ID id, SpriteSheet spriteSheet) {
         
-     
+       super(iX, iY, id, spriteSheet);
+       m_BuffImageBlock = spriteSheet.grabImage(2, 5, Block.BLOCK_WIDTH, 
+                                                          Block.BLOCK_HEIGHT);
+        
     }
 
     public void tick() {
