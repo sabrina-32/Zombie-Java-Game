@@ -16,7 +16,17 @@ import java.util.Random;
  */
 public class Enemy extends GameObject {
 
+    public static int ENEMY_WIDTH = 32;    
+    public static int ENEMY_HEIGHT = 32;
+    
+    private Handler m_Handler;
+    private Random m_Random = new Random();
+    int m_iChoose = 0;
+    int m_iHP = 100;
    
+    private BufferedImage[] m_Enemy;
+    
+    protected Animation m_Animation;
     
     
     public Enemy(int iX, int iY, ID id, Handler newHandler, 
