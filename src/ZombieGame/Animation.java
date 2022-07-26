@@ -13,7 +13,28 @@ import java.awt.image.BufferedImage;
  */
 public class Animation {
 
-  
+   private int m_iSpeed;
+   private int m_iFrames;
+   private int m_iIndex = 0;
+   private int m_iCount = 0;
+   
+   private BufferedImage[] m_Image;    
+    
+   private BufferedImage m_CurrentImage;  
+   
+   public Animation(int iSpeed, BufferedImage[] pImage, int iFrames) {
+      
+      int iCount;  
+      
+      // Correct size on the vector with BufferedImages.
+      if (pImage.length >= iFrames) {
+          
+         this.m_Image = new BufferedImage[iFrames];
+         
+         this.m_iFrames = iFrames;
+         
+         for (iCount = 0; iCount < iFrames; ++iCount)
+         {
             this.m_Image[iCount] = pImage[iCount];
          }
          
