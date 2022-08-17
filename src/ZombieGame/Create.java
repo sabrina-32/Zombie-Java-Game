@@ -20,8 +20,7 @@ public class Create extends GameObject {
     private BufferedImage m_Create;
     
     
-//    bonus bullet
-    public Create(int iX, int iY, ID id, SpriteSheet spriteSheet) {
+     public Create(int iX, int iY, ID id, SpriteSheet spriteSheet) {
         
         super(iX, iY, id, spriteSheet);
         
@@ -35,9 +34,6 @@ public class Create extends GameObject {
     }
 
     public void render(Graphics g) {
-        
-       // g.setColor(Color.cyan);
-       // g.fillRect(m_iX, m_iY, Create.CRATE_WIDTH, Create.CRATE_HEIGHT);
         
        g.drawImage(m_Create, m_iX, m_iY, null);
         

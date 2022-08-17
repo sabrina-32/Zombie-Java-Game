@@ -26,8 +26,7 @@ public class Bullet extends GameObject {
       this.m_Handler = newHandler;
       
 
-//bullet fire  mouse input direction 
-      m_fVelX = (iMouseX - m_iX) / 10;
+       m_fVelX = (iMouseX - m_iX) / 10;
       m_fVelY = (iMouseY - m_iY) / 10;
         
    }    
@@ -41,8 +40,7 @@ public class Bullet extends GameObject {
       m_iY += m_fVelY;
  
       int iCount;    
-//      remove bullet if collision  with block
-      
+       
       for (iCount = 0; iCount < m_Handler.gameObjects.size(); ++iCount) {
       
          GameObject tempGameObject = m_Handler.gameObjects.get(iCount);
@@ -51,8 +49,7 @@ public class Bullet extends GameObject {
          
             if (getBounds().intersects(tempGameObject.getBounds())) {
                
-               // Remove the Bullet. 
-               m_Handler.removeGameObject(this);
+                m_Handler.removeGameObject(this);
                
             }    
              

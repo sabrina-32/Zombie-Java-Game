@@ -27,13 +27,6 @@ public class KeyInput extends KeyAdapter {
       int iKey = ke.getKeyCode();
       int iCount;
       
-//       if(m_zombieKillingGame.gameState == m_zombieKillingGame.titleState){
-//           if(iKey == KeyEvent.VK_ENTER){
-//               m_zombieKillingGame.gameState = m_zombieKillingGame.playState;
-//               
-//           }
-//       }
-       
       
       for (iCount = 0; iCount < m_Handler.gameObjects.size(); ++iCount) {
           

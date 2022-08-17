@@ -43,8 +43,7 @@ public class Enemy extends GameObject {
         
 
         m_Enemy = new BufferedImage[3];
-//        enemy randomly moving
-        
+         
         for (iCount = 0; iCount < 3; ++iCount) {
             
            m_Enemy[iCount] = spriteSheet.grabImage(1, 4 + iCount, 
@@ -60,8 +59,7 @@ public class Enemy extends GameObject {
         
        int iCount;  
        
-//position update
-       m_iX += m_fVelX;    
+        m_iX += m_fVelX;    
        m_iY += m_fVelY;
        
        m_iChoose = m_Random.nextInt(10);
@@ -73,8 +71,7 @@ public class Enemy extends GameObject {
           
           if (tempGameObject.getID() == ID.Block) {
              
-             // Check if the enemy (with larger box around) and a block 
-             // intersects. 
+             
              if (getBoundsBig().intersects(tempGameObject.getBounds())) {
              
                 m_iX += (m_fVelX * 2) * -1;
@@ -85,8 +82,7 @@ public class Enemy extends GameObject {
                  
              }
              
-             // Otherwise choose a random direction.
-             else if (m_iChoose == 0) {
+              else if (m_iChoose == 0) {
            
                 m_fVelX = (m_Random.nextInt(8) + (-4));
                 m_fVelY = (m_Random.nextInt(8) + (-4));
@@ -97,8 +93,7 @@ public class Enemy extends GameObject {
           
           if (tempGameObject.getID() == ID.Bullet) {
              
-             // Remove Bullet and let the enemy take damage. 
-             if (getBounds().intersects(tempGameObject.getBounds())) {
+              if (getBounds().intersects(tempGameObject.getBounds())) {
                  
                 m_iHP -= 50;
                 m_Handler.removeGameObject(tempGameObject);
@@ -111,8 +106,7 @@ public class Enemy extends GameObject {
        
        m_Animation.runAnimation();
        
-       // Remove enemy, if it is dead.
-       if (m_iHP <= 0) {
+        if (m_iHP <= 0) {
            
           m_Handler.removeGameObject(this);
           enemy--;
@@ -129,15 +123,7 @@ public class Enemy extends GameObject {
 
     public void render(Graphics g) {
 
-       // g.setColor(Color.yellow);
-       // g.fillRect(m_iX, m_iY, Enemy.ENEMY_WIDTH, Enemy.ENEMY_HEIGHT);
-       
-       // Graphics2D g2d = (Graphics2D) g;
-       
-       // g.setColor(Color.green);
-       // g2d.draw(getBoundsBig());
         
-       // g.drawImage(m_Enemy, m_iX, m_iY, null);
         
        m_Animation.drawAnimation(g, m_iX, m_iY, 0);
         

@@ -26,7 +26,6 @@ public class Animation {
       
       int iCount;  
       
-      // Correct size on the vector with BufferedImages.
       if (pImage.length >= iFrames) {
           
          this.m_Image = new BufferedImage[iFrames];
@@ -40,7 +39,6 @@ public class Animation {
          
       }
       
-      // Wrong input data or wrong size on pImage.
       else {
           
          m_Image = null;

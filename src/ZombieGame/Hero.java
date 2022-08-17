@@ -38,8 +38,7 @@ public class Hero extends GameObject {
         
         m_buffImg = new BufferedImage[3];
         
-//        Hero
-        
+         
         for (iCount = 0; iCount < 3; ++iCount) {
             
            m_buffImg[iCount] = m_SpriteSheet.grabImage(1, 1 + iCount, 
@@ -58,8 +57,7 @@ public class Hero extends GameObject {
        
        collision();
        
-       // Movement "up or down" or "right or left".
-       if (m_Handler.isUp()) {
+        if (m_Handler.isUp()) {
           m_fVelY = -5;
        }
        else if (!m_Handler.isDown()) {
@@ -115,8 +113,7 @@ public class Hero extends GameObject {
  
           if (tempGameObject.getID() == ID.Create) {
              
-             // Check if the player and a crate intersects. 
-             if (getBounds().intersects(tempGameObject.getBounds())) {
+              if (getBounds().intersects(tempGameObject.getBounds())) {
              
                 m_zombieKillingGame.m_iAmmo += 10;
                 m_Handler.removeGameObject(tempGameObject);
@@ -128,15 +125,14 @@ public class Hero extends GameObject {
 //     
                    if (tempGameObject.getID() == ID.Enemy) {
              
-             // Check if the player and an enemy intersects. 
-             if (getBounds().intersects(tempGameObject.getBounds())) {
+              if (getBounds().intersects(tempGameObject.getBounds())) {
              
                 m_zombieKillingGame.m_iHP--;
                 
                 if (m_zombieKillingGame.m_iHP <= 0) {
                     
                    m_zombieKillingGame.m_iHP = 0;
-                             m_zombieKillingGame.gameState= m_zombieKillingGame.gameOverState;
+                   m_zombieKillingGame.showGameOver();
 
                 }
 
@@ -150,22 +146,13 @@ public class Hero extends GameObject {
            
           
        }
-//        count=2;
-//
-//
-//      while(count==2){
-//          System.exit(0);
-//
-//      }
+
     }
     
         
     public void render(Graphics g) {
         
-       // g.setColor(Color.blue);
-       // g.fillRect(m_iX, m_iY, Hero.WIZ_WIDTH, Hero.WIZ_HEIGHT);
        
-       // If Hero standing still, don't do any animation. 
        if (m_fVelX == 0 && m_fVelY == 0) {  
           g.drawImage(m_buffImg[0], m_iX, m_iY, null);
        }

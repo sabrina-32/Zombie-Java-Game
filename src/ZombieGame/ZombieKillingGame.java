@@ -1,6 +1,5 @@
 
-// Class: ZombieKillingGame
-
+ 
 package ZombieGame;
 
 import java.awt.Canvas;
@@ -35,6 +34,8 @@ public class ZombieKillingGame extends Canvas implements Runnable {
     public static int HEIGHT = 563;
     
     private BufferedImage m_Level = null;
+    private KeyInput m_keyInput;
+    private MouseInput m_mouseInput;
         private BufferedImage m_Menu = null;
 
     private BufferedImage m_BuffImageSpriteSheet = null;    
@@ -44,8 +45,7 @@ public class ZombieKillingGame extends Canvas implements Runnable {
     public int m_iAmmo = 130;
     public int m_iHP = 100;
     
-    //SET GAME STATE//SET GAME STATE//SET GAME STATE//SET GAME STATE//SET GAME STATE//SET GAME STATE
-    public int gameState;
+     public int gameState;
     public final int titleState = 0;
     public final int playState = 1;
     public final int pauseState = 2;
@@ -60,12 +60,7 @@ public class ZombieKillingGame extends Canvas implements Runnable {
     }
     public ZombieKillingGame() {
         
-       // Box newBox1 = new Box(100, 100, ID.Block);
-       // Box newBox2 = new Box(200, 100, ID.Block);
-    
-       // newBox1.setVelocityX(1);
-       // newBox2.setVelocityX(1);
-             
+       
       
 
        
@@ -76,11 +71,10 @@ public class ZombieKillingGame extends Canvas implements Runnable {
        
        m_Handler = new Handler();
        m_Camera = new Camera(0, 0);
-       this.addKeyListener(new KeyInput(m_Handler));
-
+       m_keyInput = new KeyInput(m_Handler);
+       this.addKeyListener(m_keyInput);
        
-       // m_Handler.addGameObject(newBox1);
-       // m_Handler.addGameObject(newBox2);
+     
        
        BufferedImageLoader m_BufferedImageLoader = new BufferedImageLoader();
        
@@ -90,14 +84,16 @@ public class ZombieKillingGame extends Canvas implements Runnable {
        m_BuffImageSpriteSheet = 
                     m_BufferedImageLoader.loadImage("Res/SpriteSheet222.png");
        
-       // m_Handler.addGameObject(new Hero(100, 100, ID.Player, m_Handler));
-       
+        
        m_SpriteSheet = new SpriteSheet(m_BuffImageSpriteSheet);
        
        m_Floor = m_SpriteSheet.grabImage(2, 4, 32, 32);
 
-       this.addMouseListener(new MouseInput(m_Handler, m_Camera, this, 
-                                                               m_SpriteSheet));       
+   
+       m_mouseInput = new MouseInput(m_Handler, m_Camera, this,
+               m_SpriteSheet);
+
+       this.addMouseListener(m_mouseInput);      
        
        loadLevel(m_Level);
        
@@ -145,7 +141,6 @@ public class ZombieKillingGame extends Canvas implements Runnable {
           
           while (dDelta >= 1) {
              tick();
-             // ++dUpdates;
              --dDelta;
           }
           
@@ -156,14 +151,11 @@ public class ZombieKillingGame extends Canvas implements Runnable {
               
              lTimer += 1000;
              iFrames = 0;
-             // dUpdates = 0;
-             
+              
           }
            
-       }   // End while(m_bIsRunning) ...
-       
-           
-                            stop();
+       }   
+            stop();
 
           
 
@@ -202,38 +194,31 @@ public class ZombieKillingGame extends Canvas implements Runnable {
       Graphics g = buffStrategy.getDrawGraphics();
       
       Graphics2D g2d = (Graphics2D) g;
-      //    TItleScreen
 
         if(gameState == titleState){
-g.setColor(new Color(70,120,80));
-g.fillRect(0, 0, WIDTH, HEIGHT);
-g.setFont(g.getFont().deriveFont(Font.BOLD,70F));
+          
+            g.setColor(new Color(70,120,80));
+            g.fillRect(0, 0, WIDTH, HEIGHT);
+            g.setFont(g.getFont().deriveFont(Font.BOLD,70F));
    
-String text = "Zombie Killing Game";
-g.setColor(Color.WHITE);
+            String text = "Zombie Killing Game";
+            g.setColor(Color.WHITE);
         
-g.drawString(text, 150, 270);
+            g.drawString(text, 150, 270);
 
-g.setFont(g.getFont().deriveFont(Font.ITALIC,30F));
+            g.setFont(g.getFont().deriveFont(Font.ITALIC,30F));
    
-String text2 = "Touch anywhere to  start the game";
-g.setColor(Color.WHITE);
+            String text2 = "Touch anywhere to  start the game";
+            g.setColor(Color.WHITE);
         
-g.drawString(text2, 280, 320);
+            g.drawString(text2, 280, 320);
 
 
         }
         
 
              
-      // Draw graphics in here.
       
-      // Start drawing.
-      
-      // g.setColor(Color.red);
-      // g.fillRect(0, 0, ZombieKillingGame.WIDTH, ZombieKillingGame.HEIGHT); 
-         
-//        else{
              g2d.translate(-m_Camera.getX(), -m_Camera.getY());
       
       int iX, iY;
@@ -248,16 +233,12 @@ g.drawString(text2, 280, 320);
          
       }
       
-//       if(gameState==gameOverState){
-//stop();    
-//}
+ 
       m_Handler.render(g);
 
       g2d.translate(m_Camera.getX(), m_Camera.getY());      
       
-      // Draw Health Bar after the "translate" call.
       
-      // Create background for the Health Bar.
       g.setColor(Color.gray);
       g.fillRect(5, 5, 200, 32);
       
@@ -267,16 +248,12 @@ g.drawString(text2, 280, 320);
       g.setColor(Color.black);
       g.drawRect(5, 5, 200, 32);
       
-      // Draw ammo information.
-      g.setColor(Color.white);
+       g.setColor(Color.white);
       g.setFont(g.getFont().deriveFont(Font.ITALIC,20F));
 
       g.drawString("Ammo : " + m_iAmmo + ".", 7, 56);      
             
-//       
 
-
-      // End drawing.
       
       g.dispose();
       buffStrategy.show();
@@ -284,8 +261,7 @@ g.drawString(text2, 280, 320);
     
     
     
-    // Loading the level.
-    private void loadLevel(BufferedImage buffImage) {
+     private void loadLevel(BufferedImage buffImage) {
         
        int iWidth = buffImage.getWidth();
        int iHeight = buffImage.getHeight();
@@ -347,5 +323,53 @@ g.drawString(text2, 280, 320);
         
         
     }
+
+    void showGameOver() {
+        BufferStrategy buffStrategy = this.getBufferStrategy();
+
+        if (buffStrategy == null) {
+            createBufferStrategy(3);
+            return;
+        }
+
+        Graphics g = buffStrategy.getDrawGraphics();
+
+        Graphics2D g2d = (Graphics2D) g;
+
+        g2d.translate(-m_Camera.getX(), -m_Camera.getY());
+
+        int iX, iY;
+
+        for (iX = 0; iX < 30 * 72; iX += 32) {
+
+            for (iY = 0; iY < 30 * 72; iY += 32) {
+
+                g.drawImage(m_Floor, iX, iY, null);
+
+            }
+
+        }
+
+
+        m_Handler.render(g);
+
+
+        g2d.translate(m_Camera.getX(), m_Camera.getY());
+
+        g.setColor(Color.red);
+        Font currentFont = g.getFont();
+        Font newFont = currentFont.deriveFont(currentFont.getSize() * 3F);
+        g.setFont(newFont);
+        g.drawString("Game Over ", 350, 240);
+
+
+
+        // End drawing.
+
+        g.dispose();
+        buffStrategy.show();
+        this.removeKeyListener(m_keyInput);
+        this.removeMouseListener(m_mouseInput);
     
+}
 }
