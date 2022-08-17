@@ -13,7 +13,8 @@ import java.awt.event.KeyEvent;
 public class KeyInput extends KeyAdapter {
    
    Handler m_Handler; 
-    
+   ZombieKillingGame m_zombieKillingGame;
+
    public KeyInput(Handler newHandler) {
        
       this.m_Handler = newHandler;
@@ -21,9 +22,18 @@ public class KeyInput extends KeyAdapter {
    }
     
    public void keyPressed(KeyEvent ke) {
-       
+
+      
       int iKey = ke.getKeyCode();
       int iCount;
+      
+//       if(m_zombieKillingGame.gameState == m_zombieKillingGame.titleState){
+//           if(iKey == KeyEvent.VK_ENTER){
+//               m_zombieKillingGame.gameState = m_zombieKillingGame.playState;
+//               
+//           }
+//       }
+       
       
       for (iCount = 0; iCount < m_Handler.gameObjects.size(); ++iCount) {
           

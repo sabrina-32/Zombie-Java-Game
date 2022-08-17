@@ -23,6 +23,9 @@ public class Enemy extends GameObject {
     private Random m_Random = new Random();
     int m_iChoose = 0;
     int m_iHP = 100;
+    int enemy=50;
+        protected ZombieKillingGame m_zombieKillingGame;
+
    
     private BufferedImage[] m_Enemy;
     
@@ -40,6 +43,7 @@ public class Enemy extends GameObject {
         
 
         m_Enemy = new BufferedImage[3];
+//        enemy randomly moving
         
         for (iCount = 0; iCount < 3; ++iCount) {
             
@@ -54,8 +58,9 @@ public class Enemy extends GameObject {
     
     public void tick() {
         
-       int iCount;       
-
+       int iCount;  
+       
+//position update
        m_iX += m_fVelX;    
        m_iY += m_fVelY;
        
@@ -110,7 +115,14 @@ public class Enemy extends GameObject {
        if (m_iHP <= 0) {
            
           m_Handler.removeGameObject(this);
+          enemy--;
           
+          
+       }
+       
+       if(enemy==0){
+           m_zombieKillingGame.gameState = m_zombieKillingGame.gameOverState;
+           
        }
               
     }

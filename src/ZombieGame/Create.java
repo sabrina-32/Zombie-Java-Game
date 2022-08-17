@@ -20,6 +20,7 @@ public class Create extends GameObject {
     private BufferedImage m_Create;
     
     
+//    bonus bullet
     public Create(int iX, int iY, ID id, SpriteSheet spriteSheet) {
         
         super(iX, iY, id, spriteSheet);

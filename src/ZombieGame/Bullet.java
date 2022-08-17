@@ -25,6 +25,8 @@ public class Bullet extends GameObject {
       super(iX, iY, id, spriteSheet);
       this.m_Handler = newHandler;
       
+
+//bullet fire  mouse input direction 
       m_fVelX = (iMouseX - m_iX) / 10;
       m_fVelY = (iMouseY - m_iY) / 10;
         
@@ -33,10 +35,13 @@ public class Bullet extends GameObject {
    public void tick() {
        
 
+      
+//   update bullet    
       m_iX += m_fVelX;
       m_iY += m_fVelY;
  
-      int iCount;     
+      int iCount;    
+//      remove bullet if collision  with block
       
       for (iCount = 0; iCount < m_Handler.gameObjects.size(); ++iCount) {
       
@@ -63,6 +68,7 @@ public class Bullet extends GameObject {
       g.fillOval(m_iX, m_iY, Bullet.BUL_WIDTH, Bullet.BUL_HEIGHT);
  
    }
+   
  
    public Rectangle getBounds() {
        

@@ -19,6 +19,7 @@ public class Camera {
    
    }
    
+//   camera follow the hero
    public void tick(GameObject gameObject) {
    
       m_fX += ((gameObject.getX() - m_fX) - ZombieKillingGame.WIDTH/2) * 0.05f; 

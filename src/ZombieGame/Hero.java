@@ -38,6 +38,8 @@ public class Hero extends GameObject {
         
         m_buffImg = new BufferedImage[3];
         
+//        Hero
+        
         for (iCount = 0; iCount < 3; ++iCount) {
             
            m_buffImg[iCount] = m_SpriteSheet.grabImage(1, 1 + iCount, 
@@ -92,6 +94,8 @@ public class Hero extends GameObject {
     private void collision() {
         
        int iCount;
+                 int count =0;
+
        
        for (iCount = 0; iCount < m_Handler.gameObjects.size(); ++iCount) {
        
@@ -121,7 +125,8 @@ public class Hero extends GameObject {
           
           }  
           
-          if (tempGameObject.getID() == ID.Enemy) {
+//     
+                   if (tempGameObject.getID() == ID.Enemy) {
              
              // Check if the player and an enemy intersects. 
              if (getBounds().intersects(tempGameObject.getBounds())) {
@@ -131,16 +136,29 @@ public class Hero extends GameObject {
                 if (m_zombieKillingGame.m_iHP <= 0) {
                     
                    m_zombieKillingGame.m_iHP = 0;
-                   
+                             m_zombieKillingGame.gameState= m_zombieKillingGame.gameOverState;
+
                 }
+
                  
              }
-          
+             
+     
+ 
           }
+            
+           
           
        }
-       
+//        count=2;
+//
+//
+//      while(count==2){
+//          System.exit(0);
+//
+//      }
     }
+    
         
     public void render(Graphics g) {
         
@@ -148,9 +166,10 @@ public class Hero extends GameObject {
        // g.fillRect(m_iX, m_iY, Hero.WIZ_WIDTH, Hero.WIZ_HEIGHT);
        
        // If Hero standing still, don't do any animation. 
-       if (m_fVelX == 0 && m_fVelY == 0) { 
+       if (m_fVelX == 0 && m_fVelY == 0) {  
           g.drawImage(m_buffImg[0], m_iX, m_iY, null);
        }
+       
        else {
           m_Animation.drawAnimation(g, m_iX, m_iY, 0);
        }

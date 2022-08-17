@@ -20,6 +20,7 @@ public class Block extends GameObject {
     private BufferedImage m_BuffImageBlock;
     
 
+//    
     public Block(int iX, int iY, ID id, SpriteSheet spriteSheet) {
         
        super(iX, iY, id, spriteSheet);

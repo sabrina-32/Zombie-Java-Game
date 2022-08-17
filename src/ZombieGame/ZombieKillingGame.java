@@ -5,10 +5,13 @@ package ZombieGame;
 
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,6 +23,8 @@ public class ZombieKillingGame extends Canvas implements Runnable {
     
     private boolean m_bIsRunning = false;
     private Thread m_Thread;
+    private Thread screen;
+    
     private Handler m_Handler;
 
     private Window m_Window;
@@ -30,13 +35,29 @@ public class ZombieKillingGame extends Canvas implements Runnable {
     public static int HEIGHT = 563;
     
     private BufferedImage m_Level = null;
+        private BufferedImage m_Menu = null;
+
     private BufferedImage m_BuffImageSpriteSheet = null;    
     private BufferedImage m_Floor = null;
+    public final int gameOverState=0;
     
-    public int m_iAmmo = 100;
+    public int m_iAmmo = 130;
     public int m_iHP = 100;
     
+    //SET GAME STATE//SET GAME STATE//SET GAME STATE//SET GAME STATE//SET GAME STATE//SET GAME STATE
+    public int gameState;
+    public final int titleState = 0;
+    public final int playState = 1;
+    public final int pauseState = 2;
+    public final int dialogueState = 3;
+    public final int characterState = 4;
     
+    
+   
+    public void setupGame(){
+                gameState = titleState;
+
+    }
     public ZombieKillingGame() {
         
        // Box newBox1 = new Box(100, 100, ID.Block);
@@ -44,6 +65,9 @@ public class ZombieKillingGame extends Canvas implements Runnable {
     
        // newBox1.setVelocityX(1);
        // newBox2.setVelocityX(1);
+             
+      
+
        
        m_Window = new Window(ZombieKillingGame.WIDTH, ZombieKillingGame.HEIGHT, 
                                                          "Zombie Killing Game", this);
@@ -60,10 +84,11 @@ public class ZombieKillingGame extends Canvas implements Runnable {
        
        BufferedImageLoader m_BufferedImageLoader = new BufferedImageLoader();
        
-       m_Level = m_BufferedImageLoader.loadImage("Res/Levels2.png");
-       
+       m_Level = m_BufferedImageLoader.loadImage("Res/Levels22.png");
+              m_Menu = m_BufferedImageLoader.loadImage("Res/MENU.png");
+
        m_BuffImageSpriteSheet = 
-                    m_BufferedImageLoader.loadImage("Res/SpriteSheet2.png");
+                    m_BufferedImageLoader.loadImage("Res/SpriteSheet222.png");
        
        // m_Handler.addGameObject(new Hero(100, 100, ID.Player, m_Handler));
        
@@ -77,6 +102,7 @@ public class ZombieKillingGame extends Canvas implements Runnable {
        loadLevel(m_Level);
        
     }
+    
     
     private void start() {
         
@@ -136,7 +162,11 @@ public class ZombieKillingGame extends Canvas implements Runnable {
            
        }   // End while(m_bIsRunning) ...
        
-       stop();
+           
+                            stop();
+
+          
+
         
     }
     
@@ -153,8 +183,9 @@ public class ZombieKillingGame extends Canvas implements Runnable {
           } 
            
        }
-        
+
        m_Handler.tick();
+      
         
     }
     
@@ -167,18 +198,43 @@ public class ZombieKillingGame extends Canvas implements Runnable {
          return;         
       }
       
+      
       Graphics g = buffStrategy.getDrawGraphics();
       
       Graphics2D g2d = (Graphics2D) g;
-      
+      //    TItleScreen
+
+        if(gameState == titleState){
+g.setColor(new Color(70,120,80));
+g.fillRect(0, 0, WIDTH, HEIGHT);
+g.setFont(g.getFont().deriveFont(Font.BOLD,70F));
+   
+String text = "Zombie Killing Game";
+g.setColor(Color.WHITE);
+        
+g.drawString(text, 150, 270);
+
+g.setFont(g.getFont().deriveFont(Font.ITALIC,30F));
+   
+String text2 = "Touch anywhere to  start the game";
+g.setColor(Color.WHITE);
+        
+g.drawString(text2, 280, 320);
+
+
+        }
+        
+
+             
       // Draw graphics in here.
       
       // Start drawing.
       
       // g.setColor(Color.red);
       // g.fillRect(0, 0, ZombieKillingGame.WIDTH, ZombieKillingGame.HEIGHT); 
-      
-      g2d.translate(-m_Camera.getX(), -m_Camera.getY());
+         
+//        else{
+             g2d.translate(-m_Camera.getX(), -m_Camera.getY());
       
       int iX, iY;
       
@@ -192,6 +248,9 @@ public class ZombieKillingGame extends Canvas implements Runnable {
          
       }
       
+//       if(gameState==gameOverState){
+//stop();    
+//}
       m_Handler.render(g);
 
       g2d.translate(m_Camera.getX(), m_Camera.getY());      
@@ -210,14 +269,19 @@ public class ZombieKillingGame extends Canvas implements Runnable {
       
       // Draw ammo information.
       g.setColor(Color.white);
-      g.drawString("Ammo : " + m_iAmmo + ".", 5, 50);      
+      g.setFont(g.getFont().deriveFont(Font.ITALIC,20F));
+
+      g.drawString("Ammo : " + m_iAmmo + ".", 7, 56);      
             
+//       
+
+
       // End drawing.
       
       g.dispose();
       buffStrategy.show();
-      
-    }
+        }
+    
     
     
     // Loading the level.
@@ -270,14 +334,17 @@ public class ZombieKillingGame extends Canvas implements Runnable {
              }
              
           }
-          
+         
        }
+      
            
     }
     
     public static void main(String[] args) {
        
-       ZombieKillingGame zombieKillingGame = new ZombieKillingGame();    
+       ZombieKillingGame zombieKillingGame = new ZombieKillingGame();  
+       
+        
         
     }
     
